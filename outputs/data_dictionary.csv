@@ -1,0 +1,22 @@
+column,group,type,description,observed_dtype,values_or_range
+customerID,Identifier,Identifier,Customer identifier; exclude from predictors,str,Unique customer identifiers
+gender,Demographics,Categorical,Recorded gender,str,Female | Male
+SeniorCitizen,Demographics,Categorical,"Senior citizen indicator: 0 = No, 1 = Yes",int64,0 | 1
+Partner,Demographics,Categorical,Whether the customer has a partner,str,No | Yes
+Dependents,Demographics,Categorical,Whether the customer has dependents,str,No | Yes
+tenure,Subscription,Numeric,Months with the company,int64,0 to 72
+PhoneService,Services,Categorical,Phone service subscription,str,No | Yes
+MultipleLines,Services,Categorical,Multiple phone lines,str,No | No phone service | Yes
+InternetService,Services,Categorical,Internet service type,str,DSL | Fiber optic | No
+OnlineSecurity,Services,Categorical,Online security subscription,str,No | No internet service | Yes
+OnlineBackup,Services,Categorical,Online backup subscription,str,No | No internet service | Yes
+DeviceProtection,Services,Categorical,Device protection subscription,str,No | No internet service | Yes
+TechSupport,Services,Categorical,Technical support subscription,str,No | No internet service | Yes
+StreamingTV,Services,Categorical,Streaming TV subscription,str,No | No internet service | Yes
+StreamingMovies,Services,Categorical,Streaming movies subscription,str,No | No internet service | Yes
+Contract,Subscription,Categorical,Contract duration,str,Month-to-month | One year | Two year
+PaperlessBilling,Subscription,Categorical,Paperless billing indicator,str,No | Yes
+PaymentMethod,Subscription,Categorical,Payment method,str,Bank transfer (automatic) | Credit card (automatic) | Electronic check | Mailed check
+MonthlyCharges,Subscription,Numeric,"Monthly charge, dataset currency units",float64,18.25 to 118.75
+TotalCharges,Subscription,Numeric,"Cumulative charges, dataset currency units",Float64,18.8 to 8684.8
+Churn,Target,Categorical,Whether the customer left: Yes = positive class,str,No | Yes

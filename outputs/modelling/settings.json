@@ -1,0 +1,145 @@
+{
+  "source": "data/Telco-Customer-Churn.csv",
+  "source_sha256": "16320c9c1ec72448db59aa0a26a0b95401046bef5d02fd3aeb906448e3055e91",
+  "versions": {
+    "pandas": "3.1.1",
+    "scikit_learn": "1.9.1"
+  },
+  "seed": 42,
+  "test_size": 0.2,
+  "stratified": true,
+  "positive_class": "Yes",
+  "target_mapping": {
+    "No": 0,
+    "Yes": 1
+  },
+  "train_customers": 5634,
+  "test_customers": 1409,
+  "numeric_predictors": [
+    "tenure",
+    "MonthlyCharges",
+    "TotalCharges"
+  ],
+  "categorical_predictors": [
+    "gender",
+    "SeniorCitizen",
+    "Partner",
+    "Dependents",
+    "PhoneService",
+    "MultipleLines",
+    "InternetService",
+    "OnlineSecurity",
+    "OnlineBackup",
+    "DeviceProtection",
+    "TechSupport",
+    "StreamingTV",
+    "StreamingMovies",
+    "Contract",
+    "PaperlessBilling",
+    "PaymentMethod"
+  ],
+  "total_charges_blanks": "Missing; training-median imputation",
+  "categorical_encoding": "One-hot, no dropped category, ignore unknown categories",
+  "scaling": "StandardScaler for Logistic Regression; scale_numeric=False for Random Forest",
+  "cv": {
+    "folds": 5,
+    "shuffle": true,
+    "seed": 42,
+    "scope": "training only"
+  },
+  "baseline": "DummyClassifier(strategy='most_frequent')",
+  "training_preprocessing": {
+    "medians": {
+      "tenure": 29.0,
+      "MonthlyCharges": 70.5,
+      "TotalCharges": 1398.125
+    },
+    "means": {
+      "tenure": 32.48509052183174,
+      "MonthlyCharges": 64.92996095136671,
+      "TotalCharges": 2301.3199503017395
+    },
+    "scales": {
+      "tenure": 24.56656301538815,
+      "MonthlyCharges": 30.135430576006627,
+      "TotalCharges": 2277.606686938009
+    },
+    "categories": {
+      "gender": [
+        "Female",
+        "Male"
+      ],
+      "SeniorCitizen": [
+        0,
+        1
+      ],
+      "Partner": [
+        "No",
+        "Yes"
+      ],
+      "Dependents": [
+        "No",
+        "Yes"
+      ],
+      "PhoneService": [
+        "No",
+        "Yes"
+      ],
+      "MultipleLines": [
+        "No",
+        "No phone service",
+        "Yes"
+      ],
+      "InternetService": [
+        "DSL",
+        "Fiber optic",
+        "No"
+      ],
+      "OnlineSecurity": [
+        "No",
+        "No internet service",
+        "Yes"
+      ],
+      "OnlineBackup": [
+        "No",
+        "No internet service",
+        "Yes"
+      ],
+      "DeviceProtection": [
+        "No",
+        "No internet service",
+        "Yes"
+      ],
+      "TechSupport": [
+        "No",
+        "No internet service",
+        "Yes"
+      ],
+      "StreamingTV": [
+        "No",
+        "No internet service",
+        "Yes"
+      ],
+      "StreamingMovies": [
+        "No",
+        "No internet service",
+        "Yes"
+      ],
+      "Contract": [
+        "Month-to-month",
+        "One year",
+        "Two year"
+      ],
+      "PaperlessBilling": [
+        "No",
+        "Yes"
+      ],
+      "PaymentMethod": [
+        "Bank transfer (automatic)",
+        "Credit card (automatic)",
+        "Electronic check",
+        "Mailed check"
+      ]
+    }
+  }
+}

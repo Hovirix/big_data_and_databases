@@ -1,0 +1,36 @@
+{
+  "tenure": {
+    "edges": [
+      -1,
+      12,
+      24,
+      48,
+      72
+    ],
+    "labels": [
+      "0\u201312",
+      "13\u201324",
+      "25\u201348",
+      "49\u201372"
+    ],
+    "right_closed": true
+  },
+  "monthly_charges": {
+    "edges": [
+      18.25,
+      35.5,
+      70.35,
+      89.85,
+      118.75
+    ],
+    "labels": [
+      "Q1",
+      "Q2",
+      "Q3",
+      "Q4"
+    ],
+    "right_closed": true,
+    "include_lowest": true,
+    "scope": "Full-dataset descriptive quartiles, not model preprocessing"
+  }
+}

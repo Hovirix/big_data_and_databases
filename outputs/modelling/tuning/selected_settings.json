@@ -1,0 +1,90 @@
+{
+  "scope": "Training-only selection; no test evaluation or final full-training refit",
+  "selection_metric": "mean validation ROC-AUC",
+  "classification_threshold": 0.5,
+  "cv": {
+    "folds": 5,
+    "shuffle": true,
+    "seed": 42,
+    "scope": "training only"
+  },
+  "seed": 42,
+  "versions": {
+    "pandas": "3.1.1",
+    "scikit_learn": "1.9.1"
+  },
+  "input_sha256": {
+    "data/Telco-Customer-Churn.csv": "16320c9c1ec72448db59aa0a26a0b95401046bef5d02fd3aeb906448e3055e91",
+    "outputs/modelling/split_ids.csv": "31168d4ebd4c4655063efb374a5f0fa89276fcc538d694ab6327b3a114023c49",
+    "outputs/modelling/settings.json": "e1161c67a1cd77e6b627d6ca6630d33e93ab6e1806590fed93be24d1d53fef02"
+  },
+  "models": {
+    "logistic_regression": {
+      "best_parameters": {
+        "model__C": 10
+      },
+      "parameter_grid": {
+        "model__C": [
+          0.1,
+          1,
+          10
+        ]
+      },
+      "estimator_defaults": {
+        "C": 1.0,
+        "class_weight": null,
+        "dual": false,
+        "fit_intercept": true,
+        "intercept_scaling": 1,
+        "l1_ratio": 0.0,
+        "max_iter": 2000,
+        "n_jobs": null,
+        "penalty": "deprecated",
+        "random_state": 42,
+        "solver": "lbfgs",
+        "tol": 0.0001,
+        "verbose": 0,
+        "warm_start": false
+      },
+      "scale_numeric": true
+    },
+    "random_forest": {
+      "best_parameters": {
+        "model__max_depth": 10,
+        "model__min_samples_leaf": 5
+      },
+      "parameter_grid": {
+        "model__max_depth": [
+          null,
+          10
+        ],
+        "model__min_samples_leaf": [
+          1,
+          5
+        ]
+      },
+      "estimator_defaults": {
+        "bootstrap": true,
+        "ccp_alpha": 0.0,
+        "class_weight": null,
+        "criterion": "gini",
+        "max_depth": null,
+        "max_features": "sqrt",
+        "max_leaf_nodes": null,
+        "max_samples": null,
+        "min_impurity_decrease": 0.0,
+        "min_samples_leaf": 1,
+        "min_samples_split": 2,
+        "min_weight_fraction_leaf": 0.0,
+        "monotonic_cst": null,
+        "n_estimators": 300,
+        "n_jobs": 1,
+        "oob_score": false,
+        "random_state": 42,
+        "verbose": 0,
+        "warm_start": false
+      },
+      "scale_numeric": false
+    }
+  }
+}
