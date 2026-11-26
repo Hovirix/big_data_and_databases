@@ -53,3 +53,8 @@ class TrainingTest(unittest.TestCase):
             baseline.to_csv(output / "baseline_cv_predictions.csv", index=False)
             with self.assertRaisesRegex(ValueError, "folds"):
                 load_training(source, output)
+            split = pd.read_csv(output / "split_ids.csv")
+            split.loc[0, "Churn"] = "No" if split.loc[0, "Churn"] == "Yes" else "Yes"
+            split.to_csv(output / "split_ids.csv", index=False)
+            with self.assertRaisesRegex(ValueError, "split targets"):
+                load_training(source, output)

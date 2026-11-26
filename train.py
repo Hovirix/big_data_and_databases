@@ -29,6 +29,8 @@ def load_training(source, preparation):
         != {"train": settings["train_customers"], "test": settings["test_customers"]}
     ):
         raise ValueError("Invalid saved split")
+    if split["Churn"].tolist() != df.loc[split["customerID"], "Churn"].tolist():
+        raise ValueError("Saved split targets do not match source data")
     # Select training rows before converting predictors or constructing targets.
     train = df.loc[split.loc[split["partition"].eq("train"), "customerID"]].copy()
     train["TotalCharges"] = pd.to_numeric(

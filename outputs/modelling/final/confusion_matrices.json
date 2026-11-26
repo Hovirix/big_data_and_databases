@@ -1,0 +1,35 @@
+{
+  "order": "Actual rows / predicted columns; labels [No, Yes]",
+  "models": {
+    "majority_baseline": [
+      [
+        1035,
+        0
+      ],
+      [
+        374,
+        0
+      ]
+    ],
+    "logistic_regression": [
+      [
+        926,
+        109
+      ],
+      [
+        165,
+        209
+      ]
+    ],
+    "random_forest": [
+      [
+        942,
+        93
+      ],
+      [
+        180,
+        194
+      ]
+    ]
+  }
+}

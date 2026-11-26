@@ -1,0 +1,31 @@
+predictor,comparison,log_odds_contrast,odds_ratio
+tenure,Increase of one training standard deviation,-1.2827113753154264,0.27728445806033125
+MonthlyCharges,Increase of one training standard deviation,-2.0227394397265845,0.13229256073337708
+TotalCharges,Increase of one training standard deviation,0.5604524932941316,1.7514648471149974
+gender,Male versus Female,0.024187813510326645,1.0244827115173138
+SeniorCitizen,1 versus 0,0.1475734172218382,1.159018373615272
+Partner,Yes versus No,0.01854872829264101,1.0187218245353302
+Dependents,Yes versus No,-0.22157262953633894,0.8012577250574877
+PhoneService,Yes versus No,0.5576705247209404,1.7465990982716015
+MultipleLines,No phone service versus No,-0.20923159896457472,0.8112073391061372
+MultipleLines,Yes versus No,0.6201755142803587,1.8592543388979037
+InternetService,Fiber optic versus DSL,2.470836113439317,11.832335891948274
+InternetService,No versus DSL,0.5536098138470268,1.7395210450108558
+OnlineSecurity,No internet service versus No,-0.7273941421030743,0.48316641406017524
+OnlineSecurity,Yes versus No,-0.09117179846088756,0.9128608693347257
+OnlineBackup,No internet service versus No,-0.6049920201499769,0.5460787842491219
+OnlineBackup,Yes versus No,0.1536324454452966,1.1660622165246621
+DeviceProtection,No internet service versus No,-0.5356497198489811,0.5852888927712917
+DeviceProtection,Yes versus No,0.29231704604727776,1.339527642267157
+TechSupport,No internet service versus No,-0.702382003196467,0.4954038436899566
+TechSupport,Yes versus No,-0.04114752064771053,0.9596875457764087
+StreamingTV,No internet service versus No,-0.23813825152411616,0.7880937284027169
+StreamingTV,Yes versus No,0.8873399826969957,2.4286607717624378
+StreamingMovies,No internet service versus No,-0.23643350167406713,0.7894383768870387
+StreamingMovies,Yes versus No,0.8907494823971078,2.4369554222043073
+Contract,One year versus Month-to-month,-0.6978871262705313,0.49763563505215086
+Contract,Two year versus Month-to-month,-1.3726995345395954,0.253421914106679
+PaperlessBilling,Yes versus No,0.36999084142124766,1.447721355532561
+PaymentMethod,Credit card (automatic) versus Bank transfer (automatic),-0.026314873698816632,0.9740283454105719
+PaymentMethod,Electronic check versus Bank transfer (automatic),0.38622090059246456,1.4714096701850468
+PaymentMethod,Mailed check versus Bank transfer (automatic),0.0785454629083985,1.0817125318421594

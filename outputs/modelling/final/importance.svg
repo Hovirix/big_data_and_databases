@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="650" viewBox="0 0 900 650" role="img">
+<title>RF permutation importance: mean test ROC-AUC drop</title>
+<rect width="100%" height="100%" fill="white"/>
+<g font-family="sans-serif" font-size="14" fill="#111">
+<text x="20" y="28">RF permutation importance: mean test ROC-AUC drop</text>
+<line x1="314.36321634713653" y1="40" x2="314.36321634713653" y2="630" stroke="#aaa"/>
+<text x="20" y="70">Contract</text>
+<rect x="314.36321634713653" y="55" width="455.63678365286347" height="20" fill="#2878a0"/>
+<text x="790" y="70">0.0386</text>
+<text x="20" y="100">tenure</text>
+<rect x="314.36321634713653" y="85" width="314.46279034304183" height="20" fill="#2878a0"/>
+<text x="790" y="100">0.0266</text>
+<text x="20" y="130">TotalCharges</text>
+<rect x="314.36321634713653" y="115" width="166.38396174074393" height="20" fill="#2878a0"/>
+<text x="790" y="130">0.0141</text>
+<text x="20" y="160">InternetService</text>
+<rect x="314.36321634713653" y="145" width="144.20553318646506" height="20" fill="#2878a0"/>
+<text x="790" y="160">0.0122</text>
+<text x="20" y="190">OnlineSecurity</text>
+<rect x="314.36321634713653" y="175" width="50.79201720887755" height="20" fill="#2878a0"/>
+<text x="790" y="190">0.0043</text>
+<text x="20" y="220">TechSupport</text>
+<rect x="314.36321634713653" y="205" width="35.44980257159824" height="20" fill="#2878a0"/>
+<text x="790" y="220">0.0030</text>
+<text x="20" y="250">PaymentMethod</text>
+<rect x="314.36321634713653" y="235" width="29.838098977005984" height="20" fill="#2878a0"/>
+<text x="790" y="250">0.0025</text>
+<text x="20" y="280">PaperlessBilling</text>
+<rect x="314.36321634713653" y="265" width="19.44577289082565" height="20" fill="#2878a0"/>
+<text x="790" y="280">0.0016</text>
+<text x="20" y="310">MonthlyCharges</text>
+<rect x="314.36321634713653" y="295" width="17.05469918530298" height="20" fill="#2878a0"/>
+<text x="790" y="310">0.0014</text>
+<text x="20" y="340">SeniorCitizen</text>
+<rect x="314.36321634713653" y="325" width="12.626333087831938" height="20" fill="#2878a0"/>
+<text x="790" y="340">0.0011</text>
+<text x="20" y="370">MultipleLines</text>
+<rect x="314.36321634713653" y="355" width="12.551612034534116" height="20" fill="#2878a0"/>
+<text x="790" y="370">0.0011</text>
+<text x="20" y="400">Dependents</text>
+<rect x="314.36321634713653" y="385" width="10.447223186562212" height="20" fill="#2878a0"/>
+<text x="790" y="400">0.0009</text>
+<text x="20" y="430">PhoneService</text>
+<rect x="314.36321634713653" y="415" width="5.4576867296311775" height="20" fill="#2878a0"/>
+<text x="790" y="430">0.0005</text>
+<text x="20" y="460">StreamingTV</text>
+<rect x="314.36321634713653" y="445" width="4.274349232511099" height="20" fill="#2878a0"/>
+<text x="790" y="460">0.0004</text>
+<text x="20" y="490">Partner</text>
+<rect x="314.36321634713653" y="475" width="3.5210390217148984" height="20" fill="#2878a0"/>
+<text x="790" y="490">0.0003</text>
+<text x="20" y="520">OnlineBackup</text>
+<rect x="314.36321634713653" y="505" width="2.1379370759828475" height="20" fill="#2878a0"/>
+<text x="790" y="520">0.0002</text>
+<text x="20" y="550">StreamingMovies</text>
+<rect x="313.6556537199923" y="535" width="0.7075626271442275" height="20" fill="#2878a0"/>
+<text x="790" y="550">-0.0001</text>
+<text x="20" y="580">gender</text>
+<rect x="312.6659809936632" y="565" width="1.6972353534733315" height="20" fill="#2878a0"/>
+<text x="790" y="580">-0.0001</text>
+<text x="20" y="610">DeviceProtection</text>
+<rect x="300.0" y="595" width="14.363216347136529" height="20" fill="#2878a0"/>
+<text x="790" y="610">-0.0012</text></g></svg>
