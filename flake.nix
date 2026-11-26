@@ -11,7 +11,7 @@
         let pkgs = nixpkgs.legacyPackages.${system};
         in {
           default = pkgs.mkShell {
-            packages = [ pkgs.python312 pkgs.uv ];
+            packages = [ pkgs.python312 pkgs.uv pkgs.just ];
             env.UV_PYTHON_DOWNLOADS = "never";
             env.LD_LIBRARY_PATH = nixpkgs.lib.makeLibraryPath [ pkgs.stdenv.cc.cc.lib ];
           };

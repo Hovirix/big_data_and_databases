@@ -10,17 +10,35 @@ Requires Nix with flakes enabled. From the repository root:
 
 ```sh
 nix develop
-uv sync --locked
+just sync
 ```
 
 Alternatively, use `direnv allow` with the existing `.envrc`.
+
+## Commands
+
+Run `just` to list commands:
+
+| Command | Purpose |
+|---|---|
+| `just view` | Generate the offline data viewer |
+| `just audit` | Check saved final results without refitting |
+| `just test` | Run tests |
+| `just overview` | Regenerate descriptive outputs |
+| `just prepare`, `just train`, `just evaluate` | Individual modelling stages; frozen runs cannot be overwritten |
+| `just package` | Create `telco-code.zip` |
+| `just package submission.zip` | Choose another archive filename |
+
+The ZIP contains `src/`, `tests/`, documentation and environment/lock files.
+It excludes the dataset, analysis outputs, caches and virtual environment.
+To run an extracted copy, also provide `data/Telco-Customer-Churn.csv`.
 
 ## Inspect the completed analysis
 
 For a quick offline visual check of the original data:
 
 ```sh
-uv run --locked python -m src.view_data
+just view
 ```
 
 Open `outputs/data_view.html` in your browser (no server needed). It includes all
@@ -28,8 +46,8 @@ customer records with search, churn/blank-value filters, group churn charts and
 the CSV fingerprint compared with modelling. It does not rerun models.
 
 ```sh
-uv run --locked python -m src.evaluate --check-only
-uv run --locked python -m unittest discover
+just audit
+just test
 ```
 
 The audit recomputes metrics from saved predictions and checks source/input hashes,
