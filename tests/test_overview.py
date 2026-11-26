@@ -6,7 +6,7 @@ import unittest
 
 import pandas as pd
 
-from overview import create_overview
+from src.overview import create_overview
 
 
 class OverviewTest(unittest.TestCase):

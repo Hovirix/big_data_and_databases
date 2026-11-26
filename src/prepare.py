@@ -1,4 +1,4 @@
-"""Run: nix develop --command uv run python prepare.py
+"""Run: nix develop --command uv run python -m src.prepare
 
 Source: https://github.com/IBM/telco-customer-churn-on-icp4d
 Split, preprocessing and training-only baseline; no final test evaluation.
@@ -19,7 +19,7 @@ from sklearn.model_selection import StratifiedKFold, train_test_split
 from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import OneHotEncoder, StandardScaler
 
-from overview import FIELDS, NUMERIC
+from .overview import FIELDS, NUMERIC
 
 
 SEED = 42
@@ -134,8 +134,8 @@ def prepare(source=Path("data/Telco-Customer-Churn.csv"), output=Path("outputs/m
     (output / "baseline_cv_metrics.json").write_text(json.dumps(metrics, indent=2) + "\n")
     report = f"""# Preparation and majority baseline
 
-Reproduce: `nix develop --command uv run python prepare.py`
-Check: `nix develop --command uv run python -m unittest test_prepare.py`
+Reproduce: `nix develop --command uv run python -m src.prepare`
+Check: `nix develop --command uv run python -m unittest tests.test_prepare`
 
 - Shared stratified 80/20 split, seed {SEED}: {len(train):,} training / {len(test):,} test customers.
 - `split_ids.csv` preserves partition membership and row order within each partition.

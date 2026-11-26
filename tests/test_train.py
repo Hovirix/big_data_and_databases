@@ -7,8 +7,8 @@ from unittest.mock import patch
 
 import pandas as pd
 
-from prepare import prepare
-from train import load_training, model_specs, tune
+from src.prepare import prepare
+from src.train import load_training, model_specs, tune
 
 
 class TrainingTest(unittest.TestCase):
@@ -36,7 +36,7 @@ class TrainingTest(unittest.TestCase):
                 name: (pipeline, {key: [values[0]] for key, values in grid.items()})
                 for name, (pipeline, grid) in specs.items()
             }
-            with patch("train.model_specs", return_value=small):
+            with patch("src.train.model_specs", return_value=small):
                 comparison = tune(source, output)
             self.assertEqual(len(comparison), 3)
             self.assertTrue(comparison["mean_cv_roc_auc"].between(0, 1).all())

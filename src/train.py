@@ -1,4 +1,4 @@
-"""Training-only tuning: nix develop --command uv run python train.py"""
+"""Training-only tuning: nix develop --command uv run python -m src.train"""
 
 import hashlib
 import json
@@ -12,7 +12,7 @@ from sklearn.metrics import f1_score, make_scorer, precision_score, recall_score
 from sklearn.model_selection import GridSearchCV, StratifiedKFold
 from sklearn.pipeline import Pipeline
 
-from prepare import CATEGORICAL, NUMERIC, make_preprocessor, require_unfrozen
+from .prepare import CATEGORICAL, NUMERIC, make_preprocessor, require_unfrozen
 
 
 def load_training(source, preparation):
@@ -152,8 +152,8 @@ def tune(source=Path("data/Telco-Customer-Churn.csv"), preparation=Path("outputs
     )
     report = f"""# Training-only model comparison
 
-Reproduce after `prepare.py`: `nix develop --command uv run python train.py`.
-Checks: `nix develop --command uv run python -m unittest test_train.py`.
+Reproduce after `src.prepare`: `nix develop --command uv run python -m src.train`.
+Checks: `nix develop --command uv run python -m unittest tests.test_train`.
 Source: [IBM Telco Customer Churn](https://github.com/IBM/telco-customer-churn-on-icp4d).
 
 All models use the saved {len(X):,} training customers and the baseline's exact

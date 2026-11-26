@@ -17,8 +17,18 @@ Alternatively, use `direnv allow` with the existing `.envrc`.
 
 ## Inspect the completed analysis
 
+For a quick offline visual check of the original data:
+
 ```sh
-uv run --locked python evaluate.py --check-only
+uv run --locked python -m src.view_data
+```
+
+Open `outputs/data_view.html` in your browser (no server needed). It includes all
+customer records with search, churn/blank-value filters, group churn charts and
+the CSV fingerprint compared with modelling. It does not rerun models.
+
+```sh
+uv run --locked python -m src.evaluate --check-only
 uv run --locked python -m unittest discover
 ```
 
@@ -32,10 +42,14 @@ Entry points and outputs:
 
 | Script | Purpose | Saved outputs |
 |---|---|---|
-| `overview.py` | Dictionary, quality checks, descriptive comparisons | `outputs/overview.md`, `outputs/churn_patterns.md`, supporting CSV/JSON |
-| `prepare.py` | Shared split, preprocessing, training-only baseline | `outputs/modelling/preparation.md`, IDs, settings, baseline predictions |
-| `train.py` | Training-only five-fold model tuning | `outputs/modelling/tuning/comparison.md`, grid results and selected settings |
-| `evaluate.py` | Frozen-setting final evaluation and interpretation | `outputs/modelling/final/evaluation.md`, predictions, metrics, SVG charts |
+| `src/overview.py` | Dictionary, quality checks, descriptive comparisons | `outputs/overview.md`, `outputs/churn_patterns.md`, supporting CSV/JSON |
+| `src/prepare.py` | Shared split, preprocessing, training-only baseline | `outputs/modelling/preparation.md`, IDs, settings, baseline predictions |
+| `src/train.py` | Training-only five-fold model tuning | `outputs/modelling/tuning/comparison.md`, grid results and selected settings |
+| `src/evaluate.py` | Frozen-setting final evaluation and interpretation | `outputs/modelling/final/evaluation.md`, predictions, metrics, SVG charts |
+
+Code lives in `src/`; tests live in `tests/`. Run modules from the repository
+root with `uv run --locked python -m src.<module>`. Tests are discovered with
+`uv run --locked python -m unittest discover`.
 
 Completed final evaluations refuse to overwrite existing metrics. Do not delete
 results merely to try different settings after seeing test performance.
@@ -48,9 +62,9 @@ the modelling steps without overwriting them, use a **new, unused directory**:
 ```sh
 uv run --locked python - <<'PY'
 from pathlib import Path
-from prepare import prepare
-from train import tune
-from evaluate import evaluate, validate_results
+from src.prepare import prepare
+from src.train import tune
+from src.evaluate import evaluate, validate_results
 
 source = Path("data/Telco-Customer-Churn.csv")
 output = Path("outputs/reproduction")
@@ -64,7 +78,7 @@ PY
 ```
 
 This repeats the same fixed analysis for reproducibility, not a new tuning round.
-For descriptive outputs alone, run `uv run --locked python overview.py`.
+For descriptive outputs alone, run `uv run --locked python -m src.overview`.
 All scripts expect the repository root as working directory.
 
 ## Method and interpretation

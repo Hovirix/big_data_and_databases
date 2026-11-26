@@ -5,12 +5,12 @@ import unittest
 
 import pandas as pd
 
-from prepare import CATEGORICAL, NUMERIC, make_preprocessor, prepare
+from src.prepare import CATEGORICAL, NUMERIC, make_preprocessor, prepare
 
 
 class PreparationTest(unittest.TestCase):
     def test_frozen_evaluation_blocks_upstream_writes(self):
-        from train import tune
+        from src.train import tune
 
         for marker in ["frozen_settings.json", "test_metrics.csv"]:
             with self.subTest(marker=marker), TemporaryDirectory() as directory:

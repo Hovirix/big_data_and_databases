@@ -9,9 +9,9 @@ from xml.etree import ElementTree
 import pandas as pd
 from sklearn.metrics import confusion_matrix, f1_score, precision_score, recall_score, roc_auc_score
 
-from evaluate import evaluate, validate_results
-from prepare import prepare
-from train import model_specs, tune
+from src.evaluate import evaluate, validate_results
+from src.prepare import prepare
+from src.train import model_specs, tune
 
 
 class EvaluationTest(unittest.TestCase):
@@ -27,7 +27,7 @@ class EvaluationTest(unittest.TestCase):
                 name: (pipeline, {key: [values[0]] for key, values in grid.items()})
                 for name, (pipeline, grid) in specs.items()
             }
-            with patch("train.model_specs", return_value=specs):
+            with patch("src.train.model_specs", return_value=specs):
                 tune(source, preparation)
             selected_path = preparation / "tuning/selected_settings.json"
             selected_hash = hashlib.sha256(selected_path.read_bytes()).hexdigest()
@@ -65,7 +65,7 @@ class EvaluationTest(unittest.TestCase):
             self.assertEqual(frozen["selected_settings_sha256"], selected_hash)
             for name, expected in frozen["code_sha256"].items():
                 archived = output / frozen["source_archive"] / name
-                self.assertEqual(archived.read_bytes(), Path(name).read_bytes())
+                self.assertEqual(archived.read_bytes(), (Path("src") / name).read_bytes())
                 self.assertEqual(hashlib.sha256(archived.read_bytes()).hexdigest(), expected)
             self.assertTrue((output / "evaluation.md").exists())
             pd.testing.assert_frame_equal(

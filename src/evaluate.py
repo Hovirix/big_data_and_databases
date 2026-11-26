@@ -1,4 +1,4 @@
-"""Final evaluation: nix develop --command uv run python evaluate.py
+"""Final evaluation: nix develop --command uv run python -m src.evaluate
 
 Uses frozen tuning settings; refuses to overwrite completed final results.
 New evaluations archive executed analysis sources in final/source/.
@@ -20,8 +20,8 @@ from sklearn.dummy import DummyClassifier
 from sklearn.inspection import permutation_importance
 from sklearn.metrics import confusion_matrix, f1_score, precision_score, recall_score, roc_auc_score
 
-from prepare import CATEGORICAL, NUMERIC
-from train import load_training, model_specs
+from .prepare import CATEGORICAL, NUMERIC
+from .train import load_training, model_specs
 
 
 def validate_results(source=Path("data/Telco-Customer-Churn.csv"), preparation=Path("outputs/modelling")):
@@ -254,9 +254,9 @@ def evaluate(source=Path("data/Telco-Customer-Churn.csv"), preparation=Path("out
     report = f"""# Final evaluation and retention hypotheses
 
 Source: [IBM Telco Customer Churn](https://github.com/IBM/telco-customer-churn-on-icp4d).
-Execution order: `overview.py` → `prepare.py` → `train.py` → `evaluate.py`.
-Run each from the repository root with `nix develop --command uv run python <script>`.
-Tests: `nix develop --command uv run python -m unittest test_train.py test_evaluate.py`.
+Execution order: `src.overview` → `src.prepare` → `src.train` → `src.evaluate`.
+Run each from the repository root with `nix develop --command uv run python -m <module>`.
+Tests: `nix develop --command uv run python -m unittest tests.test_train tests.test_evaluate`.
 
 Settings and threshold were frozen before evaluation. All models used the same
 {len(X_train):,} training and {len(X_test):,} test customers. Churn = Yes is positive.

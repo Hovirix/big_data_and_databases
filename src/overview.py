@@ -1,7 +1,7 @@
 """Dataset overview only (no model fitting).
 
 Run from the repository root:
-    nix develop --command uv run python overview.py
+    nix develop --command uv run python -m src.overview
 """
 
 import json
@@ -163,7 +163,7 @@ def create_overview(source=Path("data/Telco-Customer-Churn.csv"), output=Path("o
     patterns = f"""# Churn across customer groups
 
 Source: [IBM Telco Customer Churn](https://github.com/IBM/telco-customer-churn-on-icp4d).
-Reproduce from the repository root: `nix develop --command uv run python overview.py`.
+Reproduce from the repository root: `nix develop --command uv run python -m src.overview`.
 
 Overall churn: **{churn.loc['Yes', 'percentage']:.2f}%**.
 Churn rate = churners / customers within each group × 100.
@@ -219,8 +219,8 @@ One row represents one customer. These are descriptive results, not model evalua
 From the repository root, using the pandas dependency in `pyproject.toml`:
 
 ```sh
-nix develop --command uv run python overview.py
-nix develop --command uv run python -m unittest test_overview.py
+nix develop --command uv run python -m src.overview
+nix develop --command uv run python -m unittest tests.test_overview
 ```
 
 The source CSV is read only. Outputs in `outputs/` are regenerated.
