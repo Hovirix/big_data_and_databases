@@ -9,6 +9,23 @@ from prepare import CATEGORICAL, NUMERIC, make_preprocessor, prepare
 
 
 class PreparationTest(unittest.TestCase):
+    def test_frozen_evaluation_blocks_upstream_writes(self):
+        from train import tune
+
+        for marker in ["frozen_settings.json", "test_metrics.csv"]:
+            with self.subTest(marker=marker), TemporaryDirectory() as directory:
+                output = Path(directory)
+                (output / "final").mkdir()
+                (output / "final" / marker).write_text("historical result")
+                (output / "settings.json").write_text("historical settings")
+                before = {p.relative_to(output): p.read_bytes() for p in output.rglob("*") if p.is_file()}
+                for run in [prepare, tune]:
+                    with self.assertRaises(FileExistsError):
+                        run(Path("missing.csv"), output)
+                    self.assertEqual(before, {
+                        p.relative_to(output): p.read_bytes() for p in output.rglob("*") if p.is_file()
+                    })
+
     def test_split_and_training_only_baseline(self):
         source = Path("data/Telco-Customer-Churn.csv")
         digest = hashlib.sha256(source.read_bytes()).digest()

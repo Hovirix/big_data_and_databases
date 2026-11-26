@@ -39,7 +39,15 @@ def make_preprocessor(scale_numeric=True):
     ], remainder="drop")
 
 
+def require_unfrozen(output):
+    """Keep upstream artifacts intact once final evaluation has started."""
+    final = output / "final"
+    if (final / "frozen_settings.json").exists() or (final / "test_metrics.csv").exists():
+        raise FileExistsError("Final evaluation is frozen; choose a new output directory.")
+
+
 def prepare(source=Path("data/Telco-Customer-Churn.csv"), output=Path("outputs/modelling")):
+    require_unfrozen(output)
     df = pd.read_csv(source)
     if set(df.columns) != {field[0] for field in FIELDS}:
         raise ValueError("Unexpected dataset columns")

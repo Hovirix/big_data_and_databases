@@ -1,6 +1,9 @@
 """Final evaluation: nix develop --command uv run python evaluate.py
 
 Uses frozen tuning settings; refuses to overwrite completed final results.
+New evaluations archive executed analysis sources in final/source/.
+Historical evaluations without an archive retain their original hashes; their
+exact source cannot be reconstructed from those hashes alone.
 Source: https://github.com/IBM/telco-customer-churn-on-icp4d
 """
 
@@ -25,6 +28,11 @@ def validate_results(source=Path("data/Telco-Customer-Churn.csv"), preparation=P
     """Audit saved final results without fitting models or changing files."""
     output = preparation / "final"
     frozen = json.loads((output / "frozen_settings.json").read_text())
+    if "source_archive" in frozen:
+        for name, expected in frozen["code_sha256"].items():
+            archived = output / frozen["source_archive"] / name
+            if hashlib.sha256(archived.read_bytes()).hexdigest() != expected:
+                raise ValueError(f"Archived source changed: {name}")
     selected = frozen["selected_settings"]
     selected_path = preparation / "tuning/selected_settings.json"
     if hashlib.sha256(selected_path.read_bytes()).hexdigest() != frozen["selected_settings_sha256"]:
@@ -149,19 +157,32 @@ def evaluate(source=Path("data/Telco-Customer-Churn.csv"), preparation=Path("out
 
     # Freeze before fitting or inspecting test performance.
     output.mkdir(parents=True, exist_ok=True)
+    sources = {
+        name: Path(__file__).with_name(name).read_bytes()
+        for name in ["evaluate.py", "train.py", "prepare.py", "overview.py"]
+    }
     frozen = {
         "selected_settings": selected,
         "selected_settings_sha256": hashlib.sha256(selected_path.read_bytes()).hexdigest(),
         "threshold_rule": "Churn probability > 0.5; exact ties predict No",
         "permutation_importance": {"scoring": "roc_auc", "n_repeats": 10, "seed": settings["seed"]},
         "code_sha256": {
-            name: hashlib.sha256(Path(name).read_bytes()).hexdigest()
-            for name in ["evaluate.py", "train.py", "prepare.py", "overview.py"]
+            name: hashlib.sha256(content).hexdigest()
+            for name, content in sources.items()
         },
+        "source_archive": "source",
     }
     frozen_path = output / "frozen_settings.json"
     if frozen_path.exists() and json.loads(frozen_path.read_text()) != frozen:
         raise ValueError("An earlier evaluation started with different settings")
+    archive = output / frozen["source_archive"]
+    archive.mkdir(exist_ok=True)
+    for name, content in sources.items():
+        destination = archive / name
+        if destination.exists() and destination.read_bytes() != content:
+            raise ValueError(f"Archived source changed: {name}")
+    for name, content in sources.items():
+        (archive / name).write_bytes(content)
     frozen_path.write_text(json.dumps(frozen, indent=2) + "\n")
     for model in models.values():
         model.fit(X_train, y_train)

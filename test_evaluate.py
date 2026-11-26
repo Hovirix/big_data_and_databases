@@ -63,6 +63,10 @@ class EvaluationTest(unittest.TestCase):
                 ElementTree.parse(output / filename)
             frozen = json.loads((output / "frozen_settings.json").read_text())
             self.assertEqual(frozen["selected_settings_sha256"], selected_hash)
+            for name, expected in frozen["code_sha256"].items():
+                archived = output / frozen["source_archive"] / name
+                self.assertEqual(archived.read_bytes(), Path(name).read_bytes())
+                self.assertEqual(hashlib.sha256(archived.read_bytes()).hexdigest(), expected)
             self.assertTrue((output / "evaluation.md").exists())
             pd.testing.assert_frame_equal(
                 validate_results(source, preparation).set_index("model"), scores,
@@ -71,6 +75,12 @@ class EvaluationTest(unittest.TestCase):
             with self.assertRaises(FileExistsError):
                 evaluate(source, preparation)
             self.assertEqual(hashlib.sha256(selected_path.read_bytes()).hexdigest(), selected_hash)
+            archived = output / frozen["source_archive"] / "evaluate.py"
+            original = archived.read_bytes()
+            archived.write_bytes(b"changed")
+            with self.assertRaisesRegex(ValueError, "Archived source changed"):
+                validate_results(source, preparation)
+            archived.write_bytes(original)
             predictions.loc[0, "churn_probability"] = 1.5
             predictions.to_csv(output / "test_predictions.csv", index=False)
             with self.assertRaisesRegex(ValueError, "probabilities"):

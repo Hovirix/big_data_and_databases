@@ -12,7 +12,7 @@ from sklearn.metrics import f1_score, make_scorer, precision_score, recall_score
 from sklearn.model_selection import GridSearchCV, StratifiedKFold
 from sklearn.pipeline import Pipeline
 
-from prepare import CATEGORICAL, NUMERIC, make_preprocessor
+from prepare import CATEGORICAL, NUMERIC, make_preprocessor, require_unfrozen
 
 
 def load_training(source, preparation):
@@ -76,6 +76,7 @@ def model_specs(seed):
 
 
 def tune(source=Path("data/Telco-Customer-Churn.csv"), preparation=Path("outputs/modelling")):
+    require_unfrozen(preparation)
     X, y, folds, baseline, preparation_settings = load_training(source, preparation)
     output = preparation / "tuning"
     output.mkdir(parents=True, exist_ok=True)
