@@ -127,4 +127,6 @@ establish future-time performance, fairness or intervention benefit.
 
 Frozen settings record library versions and source/code hashes at evaluation time.
 Later audit/documentation changes do not replace that historical record.
-No KNIME workflow or course PDF is produced by this Python package.
+The native KNIME node mapping, settings, connections, extensions and platform
+differences are in [`knime/README.md`](knime/README.md). KNIME was unavailable;
+no imported/executed `.knwf` or course PDF is supplied.
